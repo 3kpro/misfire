@@ -56,3 +56,7 @@ TF-IDF cosine similarity over skill descriptions (the text the model actually us
 ## License
 
 MIT
+
+## Beyond linting — governing the agents
+
+misfire tells you which skills *will* mis-fire. Once your agents are running for real, you'll want to know which ones actually *did* — and stop the destructive ones before they happen. That's [**Red Tape**](https://redtape.dev): enforced handoffs, protected-path guardrails, and a full audit trail for your AI agent fleet. misfire keeps your skills clean; Red Tape keeps your agents accountable.

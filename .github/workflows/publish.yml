@@ -1,0 +1,28 @@
+name: publish
+
+# Trusted publishing to npm via OIDC — no tokens, no passkeys, no 2FA prompt.
+# Trigger by publishing a GitHub Release (or run manually). Requires the npm
+# package's "Trusted Publisher" to be configured once (npm -> package settings).
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write # required for OIDC trusted publishing
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          registry-url: "https://registry.npmjs.org"
+      # OIDC trusted publishing needs npm >= 11.5
+      - run: npm install -g npm@latest
+      - run: node --test test.mjs
+      - run: npm publish
