@@ -3,10 +3,29 @@
   "version": "0.1.0",
   "description": "X-ray for your Claude Code / agent skill setup: find trigger collisions, token-budget drops, and simulate which skill fires for a prompt.",
   "type": "module",
-  "bin": { "misfire": "./misfire.mjs" },
-  "files": ["misfire.mjs", "README.md"],
-  "scripts": { "test": "node --test test.mjs" },
-  "engines": { "node": ">=18" },
-  "keywords": ["claude", "claude-code", "agent", "skills", "skill-md", "lint", "mcp", "ai-agents", "context-engineering"],
-  "license": "MIT"
+  "files": [
+    "misfire.mjs",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "node --test test.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "claude",
+    "claude-code",
+    "agent",
+    "skills",
+    "skill-md",
+    "lint",
+    "mcp",
+    "ai-agents",
+    "context-engineering"
+  ],
+  "license": "MIT",
+  "bin": {
+    "misfire": "misfire.mjs"
+  }
 }
