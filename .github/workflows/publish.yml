@@ -29,5 +29,15 @@ jobs:
           # Omitting it leaves npm tokenless so trusted publishing is used.
       # OIDC trusted publishing needs npm >= 11.5
       - run: npm install -g npm@latest
+      - name: OIDC diagnostics
+        run: |
+          echo "npm version: $(npm -v)   (OIDC needs >= 11.5.1)"
+          echo "node version: $(node -v)"
+          if [ -n "$ACTIONS_ID_TOKEN_REQUEST_URL" ]; then
+            echo "ACTIONS_ID_TOKEN_REQUEST_URL: PRESENT (id-token: write is in effect)"
+          else
+            echo "ACTIONS_ID_TOKEN_REQUEST_URL: MISSING (OIDC token unavailable to the job)"
+          fi
+          echo "repo: $GITHUB_REPOSITORY   workflow_ref: $GITHUB_WORKFLOW_REF"
       - run: node --test test.mjs
       - run: npm publish
