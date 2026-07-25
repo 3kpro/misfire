@@ -1,6 +1,6 @@
 {
   "name": "misfire",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "X-ray for your Claude Code / agent skill setup: find trigger collisions, token-budget drops, and simulate which skill fires for a prompt.",
   "type": "module",
   "bin": {
