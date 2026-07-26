@@ -39,6 +39,18 @@ const c = (code, s) => (useColor ? `\x1b[${code}m${s}\x1b[0m` : String(s));
 const red = (s) => c(31, s), yel = (s) => c(33, s), grn = (s) => c(32, s),
       cyn = (s) => c(36, s), dim = (s) => c(2, s), bold = (s) => c(1, s);
 
+/**
+ * One dim, suppressible line after a successful report. Shown only on the
+ * commands that deliver value (scan/budget/json) — never on help, fire, or
+ * errors. Silence it with MISFIRE_NO_PROMO=1.
+ */
+const promo = () => {
+  if (process.env.MISFIRE_NO_PROMO) return;
+  console.log(dim("\n  misfire lints your skills. Red Tape governs the agents that run them —"));
+  console.log(dim("  enforced handoffs, protected-path guardrails, audit trail."));
+  console.log(dim("  https://redtape.dev/?utm_source=misfire&utm_medium=cli&utm_campaign=funnel"));
+};
+
 /** Rough token estimate (chars/3.7 tracks cl100k/Claude tokenizers within ~10% for English prose). */
 export const estTokens = (s) => Math.ceil((s || "").length / 3.7);
 
@@ -286,10 +298,12 @@ function main() {
       for (const s of suggestions(collisions)) console.log("  " + s);
     }
     console.log("");
+    promo();
     process.exit(collisions.length || bud.over ? 1 : 0);
   }
 
   if (cmd !== "budget") { console.error(red(`Unknown command: ${cmd}`)); process.exit(2); }
+  promo();
 }
 
 // pathToFileURL makes this work on Windows too (file:///C:/... vs C:\...)
